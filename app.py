@@ -198,4 +198,3 @@ with open("resume.pdf", "rb") as f:
         file_name="Deepesh_Pawar_Resume.pdf",
         mime="application/pdf"
     )
-``
