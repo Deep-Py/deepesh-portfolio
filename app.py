@@ -148,5 +148,7 @@ with tabs[5]:
         )
 
 # ---------------- FOOTER ----------------
+
 st.markdown("---")
-st.markdown("⭐ FAANG-Level AI Portfolio | Built with Streamlit")
+st.markdown("© Deepesh Pawar")
+
