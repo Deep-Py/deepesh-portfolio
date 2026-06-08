@@ -4,12 +4,12 @@ import plotly.express as px
 
 # ---------------- CONFIG ----------------
 st.set_page_config(
-    page_title="Deepesh Pawar | AI Portfolio",
+    page_title="Deepesh Pawar | Portfolio",
     page_icon="🚀",
     layout="wide"
 )
 
-# ---------------- THEME ----------------
+# ---------------- CSS ----------------
 st.markdown("""
 <style>
 .main {
@@ -48,25 +48,36 @@ c2.metric("Data Quality ↑", "95%")
 c3.metric("Efficiency ↑", "20%")
 
 # ---------------- TABS ----------------
-tabs = st.tabs(["👤 About", "📊 Analytics", "💼 Experience", "💻 GitHub", "🤖 AI Assistant", "📜 Resume"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+    "👤 About",
+    "📊 Skills",
+    "💼 Experience",
+    "📁 Projects",
+    "💻 GitHub",
+    "🤖 Assistant"
+])
 
 # ---------------- ABOUT ----------------
-with tabs[0]:
+with tab1:
     st.markdown('<div class="card">', unsafe_allow_html=True)
     st.write("""
-    Data Engineer with 10+ years of experience in automation, analytics, and large-scale data systems.
+    Data Engineer with 10+ years of experience in automation, analytics, and data systems.
 
-    🔹 Expert in SQL, Python & Data Pipelines  
-    🔹 Proven 95% improvement in data accuracy  
-    🔹 Strong stakeholder communication  
+    ✅ Expert in Python, SQL, Data Pipelines  
+    ✅ Improved data quality by 95%  
+    ✅ Strong stakeholder communication  
 
-    Goal: Transition into Data Science and Machine Learning roles.
+    🎯 Goal: Transition into Data Science roles
     """)
     st.markdown('</div>', unsafe_allow_html=True)
 
-# ---------------- ANALYTICS DASHBOARD ----------------
-with tabs[1]:
-    st.header("📊 Skills Analytics")
+    st.write("📍 Navi Mumbai | 📞 +91 8879535097")
+    st.write("✉️ deepesh.pawar151192@gmail.com")
+    st.write("🔗 http://www.linkedin.com/in/deepesh-pawar/")
+
+# ---------------- SKILLS ----------------
+with tab2:
+    st.header("📊 Skills Dashboard")
 
     data = {
         "Skill": ["Python","SQL","Pandas","ETL","Visualization"],
@@ -76,79 +87,115 @@ with tabs[1]:
     fig = px.bar(data, x="Skill", y="Level", color="Skill")
     st.plotly_chart(fig, use_container_width=True)
 
-# ---------------- EXPERIENCE ----------------
-with tabs[2]:
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.subheader("Here Technologies")
-    st.write("""
-    **Database Engineer II (2022–Present)**  
-    - Improved data quality by 95%  
-    - Reduced manual effort by 20%  
+# ---------------- EXPERIENCE (TIMELINE) ----------------
+with tab3:
+    st.header("💼 Experience Timeline")
 
-    **Database Engineer I (2019–2022)**  
-    - 100% clean data ingestion  
-    - Managed pipelines and UAT
-    """)
-    st.markdown('</div>', unsafe_allow_html=True)
+    with st.expander("🚀 Database Engineer II – Here Technologies (2022–Present)", expanded=True):
+        st.write("""
+        - Improved data quality by **95%**
+        - Reduced manual effort by **20%**
+        - Prevented major data loss using SQL
+        - Worked with stakeholders across teams
+        """)
 
-# ---------------- GITHUB INTEGRATION ----------------
-with tabs[3]:
+    with st.expander("📊 Database Engineer I – Here Technologies (2019–2022)"):
+        st.write("""
+        - Conducted data quality checks before releases
+        - Achieved **100% clean data ingestion**
+        - Managed JIRA pipelines
+        """)
+
+    with st.expander("🧭 Spatial Data Specialist – Here Technologies (2015–2019)"):
+        st.write("""
+        - SME for 5+ projects
+        - Resolved 30+ issues
+        - Managed 15+ team members
+        """)
+
+# ---------------- PROJECTS ----------------
+with tab4:
+    st.header("📁 Projects")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("🛒 Walmart Customer Profiling")
+        st.image("assets/walmart.png", use_column_width=True)
+        st.write("""
+        - Customer segmentation model  
+        - Marketing recommendations  
+        - Python, Pandas, NumPy  
+        """)
+
+    with col2:
+        st.subheader("🎬 Netflix Engagement")
+        st.image("assets/netflix.png", use_column_width=True)
+        st.write("""
+        - Improved recommendation system  
+        - Increased engagement by **15%**  
+        - SQL + Python  
+        """)
+
+# ---------------- GITHUB ----------------
+with tab5:
     st.header("💻 GitHub Projects")
 
-    username = "Deep-Py"  # CHANGE THIS
+    username = "your-github-username"  # ✅ CHANGE THIS
 
-    url = f"https://api.github.com/users/{username}/repos"
-    response = requests.get(url)
+    try:
+        url = f"https://api.github.com/users/{username}/repos"
+        response = requests.get(url)
 
-    if response.status_code == 200:
-        repos = response.json()
-        for repo in repos[:6]:
-            st.markdown(f"""
-            <div class="card">
-            <h4>{repo['name']}</h4>
-            <p>{repo['description']}</p>
-            <a href="{repo['html_url']}" target="_blank">View Project</a>
-            </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.warning("Unable to fetch GitHub repos")
+        if response.status_code == 200:
+            repos = response.json()
 
-# ---------------- AI CHATBOT ----------------
-with tabs[4]:
-    st.header("🤖 Ask About Me")
+            for repo in repos[:6]:
+                st.markdown(f"""
+                <div class="card">
+                    <h4>{repo['name']}</h4>
+                    <p>{repo['description'] if repo['description'] else "No description"}</p>
+                    <a href="{repo['html_url']}" target="_blank">🔗 View Repo</a>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            st.warning("Could not fetch repos")
 
-    user_q = st.text_input("Ask recruiter-style questions:")
+    except:
+        st.error("GitHub connection error")
 
-    if user_q:
-        if "experience" in user_q.lower():
-            st.write("✅ 10+ years in Data Engineering & Analytics.")
+# ---------------- SIMPLE AI ASSISTANT ----------------
+with tab6:
+    st.header("🤖 Ask Me")
 
-        elif "skills" in user_q.lower():
-            st.write("✅ Python, SQL, ETL, Data Analysis, Visualization.")
+    q = st.text_input("Ask recruiter-style questions")
 
-        elif "projects" in user_q.lower():
-            st.write("✅ Walmart Profiling & Netflix Engagement project.")
+    if q:
+        q = q.lower()
 
-        elif "strength" in user_q.lower():
-            st.write("✅ Strong data quality focus + automation expertise.")
+        if "experience" in q:
+            st.success("✅ 10+ years in Data Engineering & Analytics")
+
+        elif "skills" in q:
+            st.success("✅ Python, SQL, ETL, Data Analysis, Visualization")
+
+        elif "projects" in q:
+            st.success("✅ Walmart Profiling & Netflix Engagement projects")
+
+        elif "strength" in q:
+            st.success("✅ Strong data quality + automation mindset")
 
         else:
-            st.write("✅ Experienced Data Engineer transitioning into Data Science.")
+            st.info("✅ Experienced Data Engineer transitioning to Data Science")
 
 # ---------------- RESUME DOWNLOAD ----------------
-with tabs[5]:
-    st.header("📜 Download Resume")
-
-    with open("resume.pdf", "rb") as f:
-        st.download_button(
-            label="Download PDF Resume",
-            data=f,
-            file_name="Deepesh_Pawar_Resume.pdf",
-            mime="application/pdf"
-        )
-
-# ---------------- FOOTER ----------------
-
 st.markdown("---")
-st.markdown("© Deepesh Pawar")
 
+with open("resume.pdf", "rb") as f:
+    st.download_button(
+        label="📥 Download Resume",
+        data=f,
+        file_name="Deepesh_Pawar_Resume.pdf",
+        mime="application/pdf"
+    )
+``
