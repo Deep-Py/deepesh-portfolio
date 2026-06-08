@@ -121,7 +121,7 @@ with tab4:
 
     with col1:
         st.subheader("🛒 Walmart Customer Profiling")
-        st.image("assets/walmart.png", use_column_width=True)
+        
         st.write("""
         - Customer segmentation model  
         - Marketing recommendations  
@@ -130,7 +130,7 @@ with tab4:
 
     with col2:
         st.subheader("🎬 Netflix Engagement")
-        st.image("assets/netflix.png", use_column_width=True)
+        
         st.write("""
         - Improved recommendation system  
         - Increased engagement by **15%**  
