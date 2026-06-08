@@ -95,7 +95,7 @@ with tabs[2]:
 with tabs[3]:
     st.header("💻 GitHub Projects")
 
-    username = "your-github-username"  # CHANGE THIS
+    username = "Deep-Py"  # CHANGE THIS
 
     url = f"https://api.github.com/users/{username}/repos"
     response = requests.get(url)
